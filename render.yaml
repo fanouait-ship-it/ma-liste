@@ -1,0 +1,16 @@
+# Blueprint Render : crée le service + le disque persistant d'un seul coup
+services:
+  - type: web
+    name: ma-liste
+    runtime: docker
+    plan: starter            # un disque persistant n'est pas possible sur l'offre gratuite
+    healthCheckPath: /healthz
+    disk:
+      name: ma-liste-data
+      mountPath: /data
+      sizeGB: 5
+    envVars:
+      - key: MA_LISTE_USER
+        sync: false          # Render te demandera la valeur (ton pseudo AniList)
+      - key: MA_LISTE_PASSWORD
+        sync: false          # Render te demandera la valeur (ton mot de passe)
